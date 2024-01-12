@@ -58,6 +58,13 @@ const LandingPage = () => {
     }
   };
 
+  const handlePrev = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNext = () => {
+    if (currentPage < arrTotalPage.length) setCurrentPage(currentPage + 1);
+  };
   useEffect(() => {
     fetchProducts(url);
     fetchCategories(url);
@@ -72,97 +79,122 @@ const LandingPage = () => {
   }, [currentPage]);
 
   return (
-    <div className="home-body">
-      {/* CARD NAVBAR */}
-      <div className="card-navbar w-full flex justify-between">
-        {/* SEARCH */}
-        <div className="left-card-navbar mx-8 mt-8 flex gap-2 grow">
-          <label htmlFor="">Search</label>
-          <input
-            onChange={(e) => setSearch(e.target.value)}
-            type="text"
-            name="search"
-            id=""
-            className="border rounded-xl w-[70%] pl-2"
-          />
-        </div>
-        <div className="right-card-navbar mx-8 mt-8 flex gap-4">
-          {/* FILTER */}
-          <div className="flex gap-2">
-            <label htmlFor="">Filter</label>
-            <select
-              name="filter"
+    <>
+      <div className="home-body">
+        {/* CARD NAVBAR */}
+        <div className="card-navbar w-full flex justify-between">
+          {/* SEARCH */}
+          <div className="left-card-navbar mx-8 mt-8 flex gap-2 grow">
+            <label htmlFor="">Search</label>
+            <input
+              onChange={(e) => setSearch(e.target.value)}
+              type="text"
+              name="search"
               id=""
-              className="rounded-xl border pl-1"
-              onChange={(e) => {
-                setFilter(e.target.value);
-              }}
-            >
-              <option value="" selected disabled key={categories.length + 1}>
-                Select...
-              </option>
-              {categories.map((category) => {
-                return (
-                  <>
-                    <option key={category.id} value={category.name}>
-                      {category.name}
+              className="border rounded-xl w-[70%] pl-2"
+            />
+          </div>
+          <div className="right-card-navbar mx-8 mt-8 flex gap-4">
+            {/* FILTER */}
+            <div className="flex gap-2">
+              <label htmlFor="">Filter</label>
+              <select
+                name="filter"
+                id=""
+                className="rounded-xl border pl-1"
+                onChange={(e) => {
+                  setFilter(e.target.value);
+                }}
+              >
+                <option value="" selected disabled key={categories.length + 1}>
+                  Select...
+                </option>
+                {categories.map((category) => {
+                  return (
+                    <>
+                      <option key={category.id} value={category.name}>
+                        {category.name}
+                      </option>
+                    </>
+                  );
+                })}
+              </select>
+            </div>
+            {/* SORT */}
+            <div className="flex gap-2">
+              <label htmlFor="">Sort</label>
+              <select
+                name="page"
+                className="border rounded-xl pl-2"
+                id=""
+                onChange={(e) => {
+                  setSort(e.target.value);
+                }}
+              >
+                <option value="ASC" selected>
+                  ASC
+                </option>
+                <option value="DESC">DESC</option>
+              </select>
+            </div>
+            {/* PAGE */}
+            <div className="flex gap-2">
+              <label htmlFor="">Page</label>
+              <select
+                name="page"
+                className="border rounded-xl"
+                id=""
+                onChange={(e) => {
+                  setCurrentPage(e.target.value);
+                }}
+              >
+                {arrTotalPage.map((page) => {
+                  return (
+                    <option key={page} value={page}>
+                      {page}
                     </option>
-                  </>
-                );
-              })}
-            </select>
-          </div>
-          {/* SORT */}
-          <div className="flex gap-2">
-            <label htmlFor="">Sort</label>
-            <select
-              name="page"
-              className="border rounded-xl pl-2"
-              id=""
-              onChange={(e) => {
-                setSort(e.target.value);
-              }}
-            >
-              <option value="ASC" selected>
-                ASC
-              </option>
-              <option value="DESC">DESC</option>
-            </select>
-          </div>
-          {/* PAGE */}
-          <div className="flex gap-2">
-            <label htmlFor="">Page</label>
-            <select
-              name="page"
-              className="border rounded-xl"
-              id=""
-              onChange={(e) => {
-                setCurrentPage(e.target.value);
-              }}
-            >
-              {arrTotalPage.map((page) => {
-                return (
-                  <option key={page} value={page}>
-                    {page}
-                  </option>
-                );
-              })}
-            </select>
+                  );
+                })}
+              </select>
+            </div>
           </div>
         </div>
-      </div>
-      {/* END CARD NAVBAR */}
+        {/* END CARD NAVBAR */}
 
-      {/* CARD CONTAINER */}
-      <div className="card-container w-[100%] h-[100%] mt-[20px] p-[20px] grid grid-cols-4 gap-4">
-        {/* CARD */}
-        {products.map((product) => {
-          return <Card key={product.id} product={product} />;
-        })}
-        {/* END OF EXAMPLE CARD */}
+        {/* CARD CONTAINER */}
+        <div className="card-container w-[100%] h-[100%] mt-[20px] p-[20px] grid grid-cols-4 gap-4">
+          {/* CARD */}
+          {products.map((product) => {
+            return <Card key={product.id} product={product} />;
+          })}
+          {/* END OF EXAMPLE CARD */}
+        </div>
+        {/* END CARD CONTAINER */}
       </div>
-      {/* END CARD CONTAINER */}
-    </div>
+      <div className="flex justify-center items-center mb-8">
+        <a
+          href=""
+          onClick={(e) => {
+            e.preventDefault();
+            handlePrev();
+          }}
+        >
+          Prev
+        </a>
+        <span className="mx-12">
+          Page {currentPage} / {arrTotalPage.length}
+        </span>
+        <a
+          href=""
+          onClick={(e) => {
+            e.preventDefault();
+            handleNext();
+          }}
+        >
+          Next
+        </a>
+      </div>
+    </>
   );
 };
 export default LandingPage;

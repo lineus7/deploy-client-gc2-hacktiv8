@@ -85,9 +85,9 @@ Pastikan setiap pergantian tampilan terjadi secara reaktif dengan tidak me-refre
 
 Project web-client kalian akan terdiri dari beberapa page/route. Silahkan Implementasikan routing pada project web-client kalian:
 
-- [ ] Public site
-  - [ ] Halaman Home/Landing Page
-  - [ ] Halaman Detail
+- [v] Public site
+  - [v] Halaman Home/Landing Page
+  - [v] Halaman Detail
 - [v] CMS site
   - [v] Halaman Login
   - [v] Halaman list entitas utama
@@ -101,4 +101,4 @@ Project web-client kalian akan terdiri dari beberapa page/route. Silahkan Implem
 
 Coba lakukan deployment untuk client (bisa coba deploy hal sederhana terlebih dahulu seperti halaman yang menampilkan ‘hello world’) menggunakan Firebase
 
-- [ ] Deploy client
+- [v] Deploy client
